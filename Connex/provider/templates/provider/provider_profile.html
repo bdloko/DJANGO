@@ -1,0 +1,64 @@
+{% extends 'provider/home.html' %}
+
+{% block content %}
+<div class="content-wrapper">
+  <h2>{{ user.provider.company_name }} Profile</h2>
+  <hr>
+    <form style="font-size:12px" class="card form-control" class="container" method="POST" action="/profile/">
+        {% csrf_token %}
+        {% if user.is_authenticated %}
+        {% if user.provider.logo %}
+        <p style="margin:2% 0%"><img style="border-radius:50%" src="{{ user.provider.logo.url }}" width="100"></p><br />
+        {% endif %}
+        <p>Company Name:<inbox style="margin:0% 4%; font-weight:bold">{{user.provider.company_name }}</inbox></p><br />
+        <p>Address Line 1:<inbox style="margin:0% 4.5%; font-weight:bold">{{ user.provider.address_line_1 }}</inbox></p><br />
+        <p>Address Line 2:<inbox style="margin:0% 4.5%; font-weight:bold">{{ user.provider.address_line_2 }}</inbox></p><br />
+        <p>City:<inbox style="margin:0% 11%; font-weight:bold">{{ user.provider.city }}</inbox></p><br />
+        <p>Postal Code:<inbox style="margin:0% 6%; font-weight:bold">{{ user.provider.postal_code }}</inbox></p><br />
+        <p>Registration no.:<inbox style="margin:0% 4%; font-weight:bold">{{ user.provider.registration_no }}</inbox></p><br />
+        <p>Email Address:<inbox style="margin:0% 5%; font-weight:bold">{{ user.provider.email_address }}</inbox></p><br />
+        <p>Website URL:<inbox style="margin:0% 5.5%; font-weight:bold"><a href="">{{ user.provider.website }}</a></inbox></p><br />
+        <p>Telephone no.:<inbox style="margin:0% 5%; font-weight:bold">{{ user.provider.telephone }}</inbox></p><br />
+        <p>Description:<inbox style="margin:0% 6.5%; font-weight:bold"><b>{{ user.provider.description|linebreaks }}</b></inbox></p>
+        {% endif %}
+        <a class="btn btn-info" href="">Update</a><br />
+    </form><br />
+    <div class="container">
+        <!-- Trigger the modal with a button -->
+        <!-- Modal -->
+        <div class="modal fade" id="yModal" role="dialog">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title font-weight-bold">Update Profile</h4>
+              </div>
+              <div class="modal-body">
+                    <form novalidate method="POST" class="form-control" enctype="multipart/form-data" action="/profile/">
+                            {% csrf_token %}
+                            <div class="container">{% for field in form %}<br />
+                            {{ field.label_tag }}<br />
+                            {{ field }}
+                            {% if field.help_text %}
+                            <small style="color: grey; font-size:10px" >{{ field.help_text }}</small>
+                            {% endif %}
+                            {% for error in field.errors %}
+                            <small style="color:red; font-size:10px">{{ error }}</small>
+                            {% endfor %}
+                            {% for password in filed.help_text %}
+                            <small> help </small>
+                            {% endfor %}
+                            <br />
+                            {% endfor %}
+                        </div><br />
+                        <button class="btn btn-primary" type="submit">Update</button>
+                </form><br />
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+{% endblock %}

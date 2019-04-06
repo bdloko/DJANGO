@@ -1,0 +1,76 @@
+{% extends 'provider/home.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="content-wrapper">
+      <div class="row mb-2">
+          <div class="col-md-6">
+            <div class="card flex-md-row mb-4 box-shadow h-md-250">
+              <div class="card-body d-flex flex-column align-items-start">
+    <h2 class="d-inline-block mb-2 text-success">{{ challenge.title }}</h2><br />
+    <div class="info">
+      <span>{{ challenge.author }}</span> | <span><span><b>{{challenge.category}}</b></span></span> | <span>{{ challenge.created_at }}</span>
+    </div><br />
+    <p>{{ challenge.story }}</p><br />
+
+    <form class="card form-control" method="POST" action="" novalidate>
+        {% csrf_token %}
+        {% bootstrap_field form_a.options %}<br />
+      <button type="submit" class="btn btn-info">Submit</button>
+      <hr class="featurette-divider">
+        {% bootstrap_field form_a.comment %}<br />
+      <button type="submit" class="btn btn-info">Submit</button>
+    </form><hr><br />
+  <div class="comments-list">
+    {% for cmt in comments %}
+      {% if cmt.comment %}
+          <p>{{ cmt.by }} | <span>  {{ cmt.created_at }}</span></p>
+          <p>{{ cmt.comment|linebreaksbr }}</p><hr><br />
+      {% endif %}
+    {% endfor %}
+    </div>
+  </div>
+</div>
+</div>
+<div class="col-md-6">
+      <div class="card flex-md-row mb-4 box-shadow h-md-250">
+        <div class="card-body d-flex flex-column align-items-start">
+          <h3 class="d-inline-block mb-2 text-success">Challenge Phase Dates</h3><br />
+          <p style="font: bold">Entry: {{ dates.entry }}</p>
+          <p style="font: bold">Entry validation: {{ dates.entry_validation }}</p>
+          <p style="font: bold">Scoring: {{ dates.scoring }}</p>
+          <p style="font: bold">Faciliated judging: {{ dates.judging }}</p>
+          <p style="font: bold">Announce finalists: {{ dates.finalists }}</p>
+          <p style="font: bold">Presentation: {{ dates.presentation }}</p>
+          <p style="font: bold">Winners announcement: {{ dates.winners }}</p>
+        </div>
+      </div>
+      <div class="card flex-md-row mb-4 box-shadow h-md-250">
+          <div class="card-body d-flex flex-column align-items-start">
+            <h3 class="d-inline-block mb-2 text-success">Challenge Rules</h3><br />
+            <p style="font: bold">&#9679; {{ challenge.Entry }}</p>
+            <p style="font: bold">&#9679; {{ challenge.validation }}</p>
+            <p style="font: bold">&#9679; {{ challenge.scoring }}</p>
+            <p style="font: bold">&#9679; {{ challenge.judging }}</p>
+            <p style="font: bold">&#9679; {{ challenge.finalists }}</p>
+            <p style="font: bold">&#9679; {{ challenge.presentation }}</p>
+            <p style="font: bold">&#9679; {{ challenge.winners }}</p>
+          </div>
+        </div>
+        <div class="card flex-md-row mb-4 box-shadow h-md-250">
+            <div class="card-body d-flex flex-column align-items-start">
+              <h3 class="d-inline-block mb-2 text-success">Provider's Response</h3><br />
+              {% for option in comments %}
+              {% if user.is_authenticated and user == option.challenge.author %}
+                {% if option.options == 'Accept' or option.options == 'Decline' or option.options == 'Ignore' %}
+                  <p style="font: bold">&#9679; {{ option.by }}</p>
+                  <p>{{ option.options }}</p>
+                {% endif %}
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'solver/home.html' %}
+
+{% block content %}
+<div class="content-wrapper" style="margin:0% 40%">
+    <form novalidate class="container" method="POST" enctype="multipart/form-data" action="/update/">
+            <h2 style="margin:0% 20%" class="h3 mb-3 font-weight-bold">Update Profile</h2>
+                {% csrf_token %}
+                {% if user.is_authenticated %}
+                <div class="container">{% for field in form %}<br />
+                {{ field.label_tag }}<br />
+                {{ field }}
+                {% if field.help_text %}
+                <small style="color: grey" >{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                <small style="color:red">{{ error }}</small>
+                {% endfor %}
+                {% for password in filed.help_text %}
+                <small> help </small>
+                {% endfor %}
+                <br />
+                {% endfor %}
+                {% endif %}
+            </div><br />
+            <button class="btn btn-primary" style="margin:0% 7%" type="submit">Update</button><button class="btn btn-primary" style="margin:0% 20%"><a style="color:white" href="/accounts/home/">Cancel</a></button>
+    </form><br />
+</div><br />
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'provider/home.html' %}
+
+{% block content %}
+<div class="content-wrapper">
+    <hr class="featurette-divider">
+
+    <div class="form-control">
+            <h2>&#9997 Response</h2>
+        <table class="table">
+                <tr>
+                    <th>Provider</th>
+                    <th>Challenge</th>
+                    <th colspan="3">Option</th>
+                </tr>
+                {% for opt in comments %}
+                {% if user.is_authenticated and user == opt.by %}
+                    <tr>
+                        {% if opt.options == 'Accept' or opt.options == 'Decline' or opt.options == 'Ignore' %}
+                        <td>{{ opt.by }}</td>
+                        <td>{{ opt.challenge }}</td>
+                        <td>{{ opt.options }}</td>
+                        {% endif %}
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}

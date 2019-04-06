@@ -1,0 +1,23 @@
+{% extends 'provider/home.html' %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="modal in form-control font-weight-bold" role="dialog" aria-labelledby="channelModal" style="display:block; background-color: #84B9D3">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="channelModal">Welcome!</h4>
+                </div><br />        
+                <div class="modal-body">
+                    <div>
+                    <p style="text-align:center; font-size:16px; font-style:italic">Please make sure that you choose the right platform.</p><br />
+                        <p style="text-align:center; font-size:16px; font-style:italic">This stage is not reversable, or you can delete this account and create a new account!
+                    </p><br />
+                    <a style="margin:0% 25%" class="btn btn-outline-primary" href="/requester/">Requester</a><a class="btn btn-outline-primary" style="margin:0% 15%" href="/provider/">Provider</a>
+                </div><br />
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>
+{% endblock %}

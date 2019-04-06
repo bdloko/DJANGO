@@ -1,0 +1,28 @@
+{% extends 'provider/home.html' %}
+
+{% block content %}
+<div class="content-wrapper">
+  <form novalidate class="form-control" method="POST" enctype="multipart/form-data" action="">
+    <h2 class="h3 mb-3 font-weight-bold">Create Challenge</h2>
+    {% csrf_token %}
+    {% if user.is_authenticated %}
+      {% for field in form %}<br />
+        {{ field.label_tag }}<br />
+        {{ field }}<br />
+        {% if field.help_text %}
+        <small style="color: grey">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+        <small style="color: red">{{ error }}</small>
+        {% endfor %}
+        {% for password in filed.help_text %}
+        <small> help </small>
+        {% endfor %}
+        <br />
+        {% endfor %}
+        {% endif %}
+    <button class="btn btn-primary" style="margin:0% 3%" type="submit">Create</button><a style="margin:0% 3%" class="btn btn-primary" href="/home/">Cancel</a>
+  </form><br />
+</div>
+
+{% endblock %}

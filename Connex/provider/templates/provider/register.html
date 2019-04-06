@@ -1,0 +1,25 @@
+{% extends 'provider/home.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+    <div style="margin: 10% 5%">
+            <form novalidate method="POST" class="card form-control-lg" enctype="multipart/form-data" action="">
+                {% csrf_token %}
+            {% bootstrap_form form %}<br />
+            <div>
+                <input id="chk" onchange="submitStatus()" class="form-check form-check-inline" type="checkbox" required="required">I have read these <a href="mrdloko@gmail.com">Terms and Conditions</a>, and I accept them.<br />
+            </div><br />
+                <button id="btn" disabled="true" type="submit" class="btn btn-primary">Register</button>
+    </form><br />
+    </div>
+    <script>
+            function submitStatus(){
+                if(document.getElementById('chk').checked){
+                    document.getElementById('btn').disabled = false;
+                }else{
+                    document.getElementById('btn').disabled = true;
+                }
+        }
+        </script>
+</div>
+{% endblock %}

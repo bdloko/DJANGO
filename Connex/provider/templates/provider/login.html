@@ -1,0 +1,43 @@
+{% extends 'provider/home.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+{% block head_extra %} 
+{{ form.media }}
+
+{% endblock head_extra %}
+    <div style="margin: 10% 5%">
+<!--  <div id="my-modal" class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title font-weight-bold">login</h4>
+                </div>
+                <div class="modal-body">-->
+    {% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+    <form novalidate class="card form-control" enctype="multipart/form-data" action="" method="POST">
+      <h2 class="h3 mb-3 font-weight-bold" method="POST">Login</h2><br />
+      {% csrf_token %}
+      {% bootstrap_form form %}<br />
+            <button type="submit" class="btn btn-primary">login</button>
+    </form>
+    </div>
+</div>
+<!--            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+          </div>
+        </div>
+    </div>
+</div>
+<script>
+  $('#my-modal').modal('show');
+</script>-->
+{%  endblock %}
